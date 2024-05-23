@@ -5,8 +5,8 @@
   |============================
 */
 @import url('./reset.css');
-@import url('./vite-promo.css');
-@import url('./header.css');
+/* @import url('./vite-promo.css');
+@import url('./header.css'); */
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -22,4 +22,50 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+/* ----------- GENERAL ----------- */
+
+.to-home-link {
+  display: inline-block;
+  border: 2px dotted #fff;
+  padding: 5px;
+  text-shadow: 1px 1px 2px white;
+  transition: transform 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.to-home-link:hover {
+  transform: scale(1.04);
+  text-shadow: 2px 2px 3px white;
+  transition-duration: 100ms;
+}
+
+/* ----------- TIMER ----------- */
+
+.date-input {
+  margin-bottom: 30px;
+}
+
+.timer {
+  display: flex;
+  gap: 25px;
+  /* justify-content: center; */
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.value {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #000000;
 }
