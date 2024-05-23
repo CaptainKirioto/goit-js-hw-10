@@ -1,0 +1,2 @@
+import"./assets/modulepreload-polyfill-3cfb730f.js";/* empty css                      */import{f as o}from"./assets/vendor-2b44ac2e.js";const n=document.querySelector("section");n.classList.add("section");const s=document.querySelector("a");s.classList.add("to-home-link");const t=document.querySelector("#datetime-picker");t.classList.add("date-input");const c=document.querySelector("button");c.classList.add("start-btn");const i={enableTime:!0,time_24hr:!0,defaultDate:new Date,minuteIncrement:1,onClose(e){console.log(e[0])}};o(t,i);
+//# sourceMappingURL=commonHelpers.js.map
