@@ -69,3 +69,31 @@
   font-size: 20px;
   color: #000000;
 }
+
+/* ----------- SNACKBAR ----------- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.delay-label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.delay-label input {
+  width: 220px;
+  height: 30px;
+}
+
+fieldset {
+  width: 200px;
+  margin-bottom: 15px;
+}
+
+.form button {
+  width: 230px;
+}
