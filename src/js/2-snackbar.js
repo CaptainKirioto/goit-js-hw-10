@@ -12,9 +12,9 @@ homeLink.classList.add('to-home-link');
 
 const form = document.querySelector('.form');
 
-const delay = form.querySelector('label');
-delay.classList.add('delay-label');
-const delayInput = delay.querySelector('input[name="delay"]');
+const delayLabel = form.querySelector('label');
+delayLabel.classList.add('delay-label');
+const delayInput = delayLabel.querySelector('input[name="delay"]');
 
 const fieldset = form.querySelector('fieldset');
 const fulfilledInput = fieldset.querySelector('input[value="fulfilled"]');
@@ -22,10 +22,83 @@ const rejectedInput = fieldset.querySelector('input[value="rejected"]');
 
 const submitBtn = form.querySelector('button[type="submit"]');
 
-// submitBtn.addEventListener('submit', handleSubmit);
+// let delay = 0;
+// delayInput.addEventListener('input', handleInput);
+// function handleInput(event) {
+//   delay = event.target.value;
+// }
 
-// const handleSubmit = event => {
-//     const promise = new Promise((resolve, reject) => {
-//       if
+let radio = true;
+
+fieldset.addEventListener('click', handleClick);
+function handleClick(event) {
+  if (event.target === fulfilledInput) {
+    return (radio = true);
+  } else {
+    return (radio = false);
+  }
+}
+
+form.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event) {
+  event.preventDefault();
+  const promise = new Promise((resolve, reject) => {
+    const delay = delayInput.value;
+    setTimeout(() => {
+      if (radio) {
+        resolve(`Fulfilled promise in ${delay}ms`);
+      } else {
+        reject(`Rejected promise in ${delay}ms`);
+      }
+    }, delay);
+  });
+  promise
+    .then(SuccessMsg =>
+      iziToast.success({
+        position: 'topRight',
+        icon: '',
+        title: '✅',
+        message: SuccessMsg,
+        // progressBar: false,
+      })
+    )
+    .catch(ErrorDescription =>
+      iziToast.error({
+        position: 'topRight',
+        icon: '',
+        title: '❌',
+        message: ErrorDescription,
+        // progressBar: false,
+      })
+    );
+}
+
+// form.addEventListener('submit', handleSubmit);
+
+// function handleSubmit(event) {
+//   event.preventDefault();
+//   const promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (radio) {
+//         resolve(
+//           iziToast.show({
+//             title: '✅',
+//             message: `Fulfilled promise in ${delay}ms`,
+//             backgroundColor: 'rgb(143,188,143)',
+//           })
+//         );
+//       } else {
+//         reject(
+//           iziToast.show({
+//             title: '❌',
+//             message: `Rejected promise in ${delay}ms`,
+//             backgroundColor: 'rgb(220,20,60)',
+//           })
+//         );
+//       }
+//     }, delay);
 //   });
-// };
+
+//   promise.then(value => console.log(value)).catch(error => console.log(error));
+// }
