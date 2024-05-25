@@ -6,15 +6,17 @@ import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-/* ----------------------------------- */
+/* ------------ For styling ------------ */
 
 const section = document.querySelector('section');
 section.classList.add('section');
 const homeLink = document.querySelector('a');
 homeLink.classList.add('to-home-link');
 
+/* ----------------------------------- */
+
 const input = document.querySelector('#datetime-picker');
-input.classList.add('date-input');
+
 const button = document.querySelector('button[data-start]');
 button.classList.add('start-btn');
 const timer = document.querySelector('.timer');
@@ -25,7 +27,6 @@ const minutesValue = timer.querySelector('[data-minutes]');
 const secondsValue = timer.querySelector('[data-seconds]');
 
 let userSelectedDate = null;
-const date = new Date();
 button.disabled = true;
 
 const options = {
@@ -36,13 +37,13 @@ const options = {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     userSelectedDate = selectedDates[0];
-    if (userSelectedDate.getTime() < date.getTime()) {
-      // button.disabled = true;
-      iziToast.show({
+    if (userSelectedDate <= new Date()) {
+      button.disabled = true;
+      iziToast.error({
+        position: 'topRight',
+        icon: '',
         title: 'Dude!',
         message: 'Please choose a date in the future',
-        // titleColor: 'rgb(178, 34, 34)',
-        backgroundColor: 'rgb(205,92,92)',
       });
     } else {
       button.disabled = false;
@@ -53,58 +54,48 @@ const fp = flatpickr(input, options);
 
 button.addEventListener('click', handleStart);
 
+let selectedDate = null;
+
 function handleStart(event) {
   button.disabled = true;
-  // const remainingMs = userSelectedDate - date;
-  // console.log(remainingMs);
+  input.disabled = true;
 
-  // let remainingTime = convertMs(remainingMs);
-  // console.log(remainingTime);
-
-  // const daysFormatted = addLeadingZero(String(remainingTime.days));
-  // const hoursFormatted = addLeadingZero(String(remainingTime.hours));
-  // const minutesFormatted = addLeadingZero(String(remainingTime.minutes));
-  // const secondsFormatted = addLeadingZero(String(remainingTime.seconds));
-
-  // daysValue.innerHTML = daysFormatted;
-  // hoursValue.innerHTML = hoursFormatted;
-  // minutesValue.innerHTML = minutesFormatted;
-  // secondsValue.innerHTML = secondsFormatted;
+  selectedDate = userSelectedDate;
 
   const intervalId = setInterval(() => {
     const currentDate = new Date();
-    const remainingMs = userSelectedDate - currentDate;
+    const remainingMs = selectedDate - currentDate;
     if (remainingMs > 0) {
-      let remainingTime = convertMs(remainingMs);
-      console.log(remainingTime);
-
-      const daysFormatted = addLeadingZero(String(remainingTime.days));
-      const hoursFormatted = addLeadingZero(String(remainingTime.hours));
-      const minutesFormatted = addLeadingZero(String(remainingTime.minutes));
-      const secondsFormatted = addLeadingZero(String(remainingTime.seconds));
-
-      daysValue.innerHTML = daysFormatted;
-      hoursValue.innerHTML = hoursFormatted;
-      minutesValue.innerHTML = minutesFormatted;
-      secondsValue.innerHTML = secondsFormatted;
+      const convertedTime = convertMs(remainingMs);
+      daysValue.innerHTML = addLeadingZero(convertedTime.days);
+      hoursValue.innerHTML = addLeadingZero(convertedTime.hours);
+      minutesValue.innerHTML = addLeadingZero(convertedTime.minutes);
+      secondsValue.innerHTML = addLeadingZero(convertedTime.seconds);
     } else {
       clearInterval(intervalId);
-      iziToast.show({
+      iziToast.success({
+        position: 'topRight',
+        icon: '',
         title: 'Dude!',
         message: 'Your time is up',
-        backgroundColor: 'rgb(143,188,143)',
       });
+      input.disabled = false;
     }
   }, 1000);
 }
 
+/* ------------ Adding 0 ------------ */
+
 const addLeadingZero = value => {
+  value = String(value);
   if (value.length === 1) {
     return value.padStart(2, '0');
   } else {
     return value;
   }
 };
+
+/* ------------ Converting ms ------------ */
 
 function convertMs(ms) {
   const second = 1000;

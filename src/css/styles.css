@@ -1,4 +1,4 @@
-/**
+/* *
   |============================
   | include css partials with
   | default @import url()
@@ -26,6 +26,10 @@
 
 /* ----------- GENERAL ----------- */
 
+* {
+  box-sizing: border-box;
+}
+
 .to-home-link {
   display: inline-block;
   border: 2px dotted #fff;
@@ -41,16 +45,92 @@
   transition-duration: 100ms;
 }
 
+body {
+  background-color: rgb(173, 160, 219);
+  border-radius: 10px;
+  height: 100vh;
+  margin: 15px;
+  padding: 10px;
+}
+
+/* ----------- HOME PAGE ----------- */
+
+.home-list {
+  text-align: center;
+  line-height: 2;
+  padding-top: 50px;
+  font-size: 50px;
+}
+
+.home-list-link {
+  text-shadow: 2px 2px 4px white;
+  text-decoration: underline;
+  text-decoration-color: #fff;
+  text-decoration-thickness: 2px;
+}
+
+.home-list-item:hover {
+  transform: scale(1.04);
+}
+
+.home-list-link:hover {
+  text-shadow: 4px 4px 4px white;
+  transition-duration: 100ms;
+}
+
 /* ----------- TIMER ----------- */
 
-.date-input {
+.timer-container {
+  width: 430px;
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.flatpickr-input {
+  width: 250px;
   margin-bottom: 30px;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px 5px;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.start-btn {
+  width: 80px;
+  border: 1px solid #808080;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: rgb(173, 160, 219);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  transition: background-color 300ms linear;
+}
+
+.start-btn:hover,
+.start-btn:active {
+  background-color: rgb(143, 132, 181);
+  border: 1px solid #000000;
+}
+
+.start-btn:disabled {
+  background-color: rgb(124, 122, 131);
+  border: 1px solid #000000;
 }
 
 .timer {
   display: flex;
   gap: 25px;
-  /* justify-content: center; */
 }
 
 .field {
@@ -76,6 +156,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 300px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0 auto;
 }
 
 .delay-label {
@@ -87,13 +173,45 @@
 .delay-label input {
   width: 220px;
   height: 30px;
+  border: 1px solid #808080;
+  border-radius: 4px;
+
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 16px;
+
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.delay-label input:hover,
+.delay-label input:focus {
+  border-color: #000;
+  outline: none;
 }
 
 fieldset {
-  width: 200px;
+  width: 220px;
   margin-bottom: 15px;
 }
 
 .form button {
-  width: 230px;
+  width: 220px;
+  border: 1px solid #808080;
+  border-radius: 8px;
+  padding: 8px 16px;
+  background: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  transition: background-color 300ms linear;
+}
+
+.form button:hover,
+.form button:active {
+  background-color: rgb(143, 132, 181);
+  border: 1px solid #000000;
 }
